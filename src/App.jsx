@@ -12,7 +12,9 @@ export const tabs = [
 ];
 
 function getSelectedTabTitle(tabsList, tabId) {
-  return tabsList.find(tab => tab.id === tabId);
+  const getTabTitle = tabsList.find(tab => tab.id === tabId);
+
+  return getTabTitle.title;
 }
 
 export const App = () => {
@@ -33,13 +35,12 @@ export const App = () => {
 
   return (
     <div className="section">
-      <h1 className="title">Selected tab is {selectedTab.title}</h1>
+      <h1 className="title">Selected tab is {selectedTab}</h1>
 
       <Tabs
         tabs={tabs}
         activeTabId={activeTabId}
         onTabSelected={tabId => setNewActiveTab(tabId)}
-        selectedTab={selectedTab}
       />
     </div>
   );

@@ -1,11 +1,13 @@
 import { Tab } from '../Tab';
 
 export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
-  const getSelectedTabTitle = (tabsList, tabId) => {
-    return tabsList.find(tab => tab.id === tabId);
+  const getSelectedTabContent = (tabsList, tabId) => {
+    const getTabContent = tabsList.find(tab => tab.id === tabId);
+
+    return getTabContent.content;
   };
 
-  function checkAvailiableTabId(id) {
+  function checkAvailableTabId(id) {
     const isInTabs = tabs.find(tab => tab.id === id);
 
     if (isInTabs === undefined) {
@@ -15,9 +17,9 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
     return id;
   }
 
-  const selectedTab = getSelectedTabTitle(
+  const selectedTabContent = getSelectedTabContent(
     tabs,
-    checkAvailiableTabId(activeTabId),
+    checkAvailableTabId(activeTabId),
   );
 
   return (
@@ -28,7 +30,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
             <Tab
               key={tab.id}
               tab={tab}
-              activeTabId={checkAvailiableTabId(activeTabId)}
+              activeTabId={checkAvailableTabId(activeTabId)}
               // activeTabId={checkAvailiableTabId(activeTabId)}
               onTabSelected={onTabSelected}
             />
@@ -37,7 +39,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
       </div>
 
       <div className="block" data-cy="TabContent">
-        {selectedTab.content}
+        {selectedTabContent}
       </div>
     </div>
   );
